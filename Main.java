@@ -1,8 +1,9 @@
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
     System.out.println("Vvedite dannye:");
     Scanner inp = new Scanner(System.in);
     String input = inp.nextLine();
@@ -11,7 +12,7 @@ public class Main {
     System.out.println(calc(input));
 }
 
-    public static String calc(String input) {
+    public static String calc(String input) throws IOException {
 
         String[] calc_input = input.split(" ");
         if (calc_input.length != 3) {
@@ -33,14 +34,14 @@ public class Main {
         b.value = b.value(); // значение int для расчета результата
 
         if (a.type != b.type) {
-            System.out.println("ERROR: operandy dolzhny imet odin tip");
-            System.exit(0);}
+            throw new IOException("ERROR: operandy dolzhny imet odin tip");
+            }
         if (a.value <0 || b.value <0) {
-            System.out.println("ERROR: operand ne mozhet byt menshe 0");
-            System.exit(0);}
+            throw new IOException("ERROR: operand ne mozhet byt menshe 0");
+        }
         if (a.value >10 || b.value >10) {
-            System.out.println("ERROR: operand ne mozhet byt bolshe 10");
-            System.exit(0);}
+            throw new IOException("ERROR: operand ne mozhet byt bolshe 10");
+            }
 
         int result = 0; //результат вычислений в арабских цифрах
         String romresult = ""; //результат вычислений в римских цифрах, если применимо
@@ -57,8 +58,8 @@ public class Main {
                 System.out.println("Exception");
                 System.out.println("Only integer non-zero parameters allowed");
                 System.exit(1);}}
-            default -> {System.out.println("ERROR: Vveden nekorrektny operator");
-                System.exit(0);}
+            default -> {throw new IOException("ERROR: Vveden nekorrektny operator");
+                }
         }
 
         if (a.type == 2 & b.type == 2) { // перевод результата в римские цифры
@@ -100,8 +101,8 @@ public class Main {
                     result -= 1;
                 }
             }
-            else {System.out.println("Nevozmozhno poluchit resultat <1 v rimskih tsifrakh");
-                System.exit(0);}
+            else {throw new IOException("Nevozmozhno poluchit resultat <1 v rimskih tsifrakh");
+                }
         }
         else {arabresult = Integer.toString(result);
             romresult="n/a";}
@@ -146,12 +147,12 @@ public class Main {
                     default -> type = 3;}
             return type;}
 
-        int value() {
+        int value() throws IOException {
             if (type == 1) {
                 value = Integer.parseInt(input);}
             else if (type == 3) {
-                System.out.println("ERROR: Vveden nekorrektny operand");
-                System.exit(0);}
+                throw new IOException("ERROR: Vveden nekorrektny operand");
+                }
             else
                 switch (input) {
                     case "I" -> value = 1;
