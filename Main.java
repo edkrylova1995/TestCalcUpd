@@ -16,8 +16,7 @@ public class Main {
 
         String[] calc_input = input.split(" ");
         if (calc_input.length != 3) {
-            System.out.println("ERROR: vvedite vyrazhenie s 2 operandami");
-            System.exit(0);
+            throw new IOException("ERROR: vvedite vyrazhenie s 2 operandami");
         }
 
         Main.Vrbl a = new Vrbl(); // первый операнд
@@ -109,17 +108,6 @@ public class Main {
 
         if (a.type == 1 & b.type == 1) endresult = arabresult;
         if (a.type == 2 & b.type == 2) endresult = romresult;
-
-        //костыли для проверки, где именно ломается код
-        //System.out.println("a-input " + vrbla.input);
-        //System.out.println("a-type " + vrbla.type);
-        //System.out.println("a-value " + vrbla.value);
-        //System.out.println("b-input " + vrblb.input);
-        //System.out.println("b-type " + vrblb.type);
-        //System.out.println("b-value " + vrblb.value);
-        //System.out.println("operator " + operator.input);
-        //System.out.println("rom " + romresult);
-        //System.out.println("arab " + arabresult);
 
         return endresult;}
 
